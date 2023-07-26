@@ -1,0 +1,120 @@
+name: Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-packages:
+    name: Build core packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        run: echo "checkout branch..."
+
+      - name: Install
+        run: echo "install..."
+
+      - name: Build
+        run: echo "build packages..."
+
+      - name: Create dist packages
+        run: echo "build packages..."
+
+      - name: Upload packages artifact
+        run: echo "upload build artifact..."
+
+  build-bundle:
+    name: Build deployable bundle
+    runs-on: ubuntu-latest
+    needs: build-packages
+    steps:
+      - name: Checkout branch
+        run: echo "checkout branch..."
+
+      - name: Download packages artifact
+        run: echo "download packages artifact..."
+        
+      - name: Install
+        run: echo "install..."
+
+      - name: Build CSS
+        run: echo "build css..."
+
+      - name: Build criticals
+        run: echo "build criticals..."
+
+      - name: Create zip file
+        run: echo "create zip file..."
+
+      - name: Upload build artifact
+        run: echo "upload build artifact..."
+
+  deploy-staging:
+    name: Deploy to staging
+    runs-on: ubuntu-latest
+    needs: build-bundle
+    environment:
+      name: Staging
+      url: https://staging.example.com
+
+    steps:
+      - name: Checkout branch
+        run: echo "checkout branch..."
+
+      - name: Download build artifact
+        run: echo "download build artifact..."
+
+      - name: Upload bundle
+        run: echo "upload bundle..."
+
+      - name: Terminate oldest service
+        run: echo "terminate oldest service..."
+
+      - name: Deploy new service
+        run: echo "deploy new service..."
+
+      - name: Promote service
+        run: echo "promote new service..."
+
+  deploy-production:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    environment:
+      name: Production
+      url: https://example.com
+
+    steps:
+      - name: Checkout branch
+        run: echo "checkout branch..."
+
+      - name: Download build artifact
+        run: echo "download build artifact..."
+
+      - name: Upload bundle
+        run: echo "upload bundle..."
+
+      - name: Terminate oldest service
+        run: echo "terminate oldest service..."
+
+      - name: Deploy new service
+        run: echo "deploy new service..."
+
+      - name: Promote service
+        run: echo "promote new service..."
+
+  notify:
+    name: Notify deployment
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    steps:
+      - name: Checkout branch
+        run: echo "checkout branch..."
+
+      - name: Get PR number and commit message
+        run: echo "pr number and commite message..."
+
+      - name: Send Teams channel notification
+        run: echo "send notification..."
