@@ -24,15 +24,15 @@ jobs:
         run: cd tmp && npm run build
 
       - name: Copy dist packages
-        run: |
-          ls -la tmp
-          find tmp/packages/* -type d -name dist -exec mkdir -p ./packages/{} \; -exec cp -r {}/. ./packages/{} \;
+        run: find tmp/packages/* -type d -name dist -exec mkdir -p ./packages/{} \; -exec cp -r {}/. ./packages/{} \;
 
       - name: Checkout branch
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: npm i
+        run: |
+          ls -la
+          npm i
 
       - name: Build CSS
         run: npm run build:css
