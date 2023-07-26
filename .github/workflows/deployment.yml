@@ -18,7 +18,7 @@ jobs:
           path: dist
 
       - name: Install
-        run: npm i
+        run: cd dist && npm i
 
       - name: Build
         run: npm run build
