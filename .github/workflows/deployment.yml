@@ -52,6 +52,8 @@ jobs:
         run: echo "upload build artifact..."
 
   staging:
+    name: Deploy
+    needs: bundle
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
@@ -61,36 +63,15 @@ jobs:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
   production:
-    name: Deploy to production
-    runs-on: ubuntu-latest
+    name: Deploy
     needs: staging
-    environment:
-      name: Production
-
-    env:
-      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ENVIRONMENT: production
       DEPLOY_API_URL: ${{ vars.DEPLOY_API_URL }}
-
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-
-      - name: Download build artifact
-        run: echo "download build artifact..."
-
-      - name: Upload bundle
-        run: |
-          chmod +x ./scripts/deployment/upload.sh
-          bash ./scripts/deployment/upload.sh
-
-      - name: Terminate oldest service
-        run: echo "terminate oldest service..."
-
-      - name: Deploy new service
-        run: echo "deploy new service..."
-
-      - name: Promote service
-        run: echo "promote new service..."
+      PROMOTE: true
+    secrets:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
   notify:
     name: Notify deployment
