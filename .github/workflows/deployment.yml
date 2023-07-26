@@ -9,7 +9,6 @@ jobs:
   bundle:
     name: Build ARC bundle
     runs-on: ubuntu-latest
-    needs: packages
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
