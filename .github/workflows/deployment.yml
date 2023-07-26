@@ -66,8 +66,7 @@ jobs:
         run: echo "download build artifact..."
 
       - name: Upload bundle
-        run: |
-          node ${GITHUB_WORKSPACE}/scripts/deployment/upload.js
+        run: ls -la
 
       - name: Terminate oldest service
         run: echo "terminate oldest service..."
