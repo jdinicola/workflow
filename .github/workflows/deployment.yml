@@ -55,6 +55,7 @@ jobs:
     name: Deploy
     needs: bundle
     uses: ./.github/workflows/deploy.yml
+    environment: staging
     with:
       ENVIRONMENT: staging
       DEPLOY_API_URL: ${{ vars.DEPLOY_API_URL }}
@@ -66,6 +67,7 @@ jobs:
     name: Deploy
     needs: staging
     uses: ./.github/workflows/deploy.yml
+    environment: production
     with:
       ENVIRONMENT: production
       DEPLOY_API_URL: ${{ vars.DEPLOY_API_URL }}
