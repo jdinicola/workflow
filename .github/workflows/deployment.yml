@@ -27,7 +27,7 @@ jobs:
         run: cd tmp && npm run build
 
       - name: Copy dist packages
-        run: cd tmp && find packages/* -type d -name dist -exec mkdir -p ../packages/{} \; -exec cp -r {}/. ../packages/{} \;
+        run: cd tmp && find packages/* -type d -name dist -exec mkdir -p ../{} \; -exec cp -r {}/. ../{} \;
 
       - name: Install dependencies
         run: npm i
