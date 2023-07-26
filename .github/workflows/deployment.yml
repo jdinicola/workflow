@@ -67,8 +67,8 @@ jobs:
 
       - name: Upload bundle
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/upload.sh
-          bash ${GITHUB_WORKSPACE}/scripts/deployment/upload.sh
+          chmod +x ./scripts/deployment/upload.sh
+          bash ./scripts/deployment/upload.sh
 
       - name: Terminate oldest service
         run: echo "terminate oldest service..."
