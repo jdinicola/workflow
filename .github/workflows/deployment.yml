@@ -6,14 +6,14 @@ on:
       - main
 
 jobs:
-  bundle:
-    name: Build bundle
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
 
-      - name: Checkout branch
+      - name: Checkout branch (core components)
         uses: actions/checkout@v3
         with:
           repository: jdinicola/playground
@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: cd tmp && npm i
 
-      - name: Build
+      - name: Build packages
         run: cd tmp && npm run build
 
       - name: Copy dist packages
@@ -55,7 +55,6 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
-      PROMOTE: true
 
   production:
     name: Deploy
@@ -63,7 +62,6 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: production
-      PROMOTE: true
 
   notify:
     name: Notify deployment

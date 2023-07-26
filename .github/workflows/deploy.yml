@@ -7,8 +7,9 @@ on:
         required: true
         type: string
       PROMOTE:
-        required: true
+        required: false
         type: boolean
+        default: true
 
 jobs:
   deploy:
