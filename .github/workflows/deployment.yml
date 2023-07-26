@@ -113,7 +113,7 @@ jobs:
   notify:
     name: Notify deployment
     runs-on: ubuntu-latest
-    needs: deploy-production
+    needs: production
     steps:
       - name: Checkout branch
         run: echo "checkout branch..."
