@@ -24,7 +24,7 @@ jobs:
         run: cd tmp && npm run build
 
       - name: Create dist packages
-        run: find packages/* -type d -name dist -exec mkdir -p ./dist/{} \; -exec cp -r {}/. ./dist/{} \;
+        run: find tmp/packages/* -type d -name dist -exec mkdir -p ./dist/{} \; -exec cp -r {}/. ./dist/{} \;
 
       - name: Checkout branch
         uses: actions/checkout@v3
