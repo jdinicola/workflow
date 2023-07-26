@@ -1,0 +1,8 @@
+{
+    "name": "workflow",
+    "version": "0.0.1",
+    "scripts": {
+        "build:css": "echo 'build css...'",
+        "build:criticals": "echo 'build criticals...'"
+    }
+}

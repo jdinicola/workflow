@@ -11,19 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        run: echo "checkout branch..."
+        uses: actions/checkout@v3
+        with:
+          repository: jdinicola/playground
+          token: ${{ secrets.REPO_TOKEN }}
 
       - name: Install
-        run: echo "install..."
+        run: npm i
 
       - name: Build
-        run: echo "build packages..."
+        run: npm run build
 
       - name: Create dist packages
-        run: echo "build packages..."
+        run: find packages/* -type d -name dist -exec mkdir -p ./dist/{} \; -exec cp -r {}/. ./dist/{} \;
 
       - name: Upload packages artifact
-        run: echo "upload build artifact..."
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: ./dist/packages
+          retention-days: 1
+          if-no-files-found: error
 
   bundle:
     name: Build ARC bundle
@@ -31,25 +39,33 @@ jobs:
     needs: packages
     steps:
       - name: Checkout branch
-        run: echo "checkout branch..."
+        uses: actions/checkout@v3
+
+      - name: Install
+        run: npm i
 
       - name: Download packages artifact
-        run: echo "download packages artifact..."
-        
-      - name: Install
-        run: echo "install..."
+        uses: actions/download-artifact@v3
+        with:
+          name: packages
+          path: ./packages
 
       - name: Build CSS
-        run: echo "build css..."
+        run: npm run build:css
 
       - name: Build criticals
-        run: echo "build criticals..."
+        run: npm run build:criticals
 
       - name: Create zip file
-        run: echo "create zip file..."
+        run: bash ./scripts/deployment/create.sh
 
       - name: Upload build artifact
-        run: echo "upload build artifact..."
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle
+          path: ./dist/bundle.zip
+          retention-days: 1
+          if-no-files-found: error
 
   staging:
     name: Deploy
@@ -58,8 +74,6 @@ jobs:
     with:
       ENVIRONMENT: staging
       PROMOTE: true
-    secrets:
-      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
   production:
     name: Deploy
@@ -67,9 +81,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: production
-      PROMOTE: false
-    secrets:
-      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      PROMOTE: true
 
   notify:
     name: Notify deployment
