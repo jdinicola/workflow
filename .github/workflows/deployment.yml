@@ -55,10 +55,8 @@ jobs:
     name: Deploy
     needs: bundle
     uses: ./.github/workflows/deploy.yml
-    environment: staging
     with:
       ENVIRONMENT: staging
-      DEPLOY_API_URL: ${{ vars.DEPLOY_API_URL }}
       PROMOTE: true
     secrets:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
@@ -67,10 +65,8 @@ jobs:
     name: Deploy
     needs: staging
     uses: ./.github/workflows/deploy.yml
-    environment: production
     with:
       ENVIRONMENT: production
-      DEPLOY_API_URL: ${{ vars.DEPLOY_API_URL }}
       PROMOTE: false
     secrets:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
