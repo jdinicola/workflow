@@ -60,14 +60,15 @@ jobs:
 
     steps:
       - name: Checkout branch
-        run: echo "checkout branch..."
+        uses: actions/checkout@v3
 
       - name: Download build artifact
         run: echo "download build artifact..."
 
       - name: Upload bundle
-        run: ls -la
-        working-directory: ${{ github.workspace }}
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/upload.sh
+          bash ${GITHUB_WORKSPACE}/scripts/deployment/upload.sh
 
       - name: Terminate oldest service
         run: echo "terminate oldest service..."
