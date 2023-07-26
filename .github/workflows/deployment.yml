@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+
+      - name: Checkout branch
+        uses: actions/checkout@v3
         with:
           repository: jdinicola/playground
           token: ${{ secrets.GH_TOKEN }}
@@ -26,13 +29,8 @@ jobs:
       - name: Copy dist packages
         run: find tmp/packages/* -type d -name dist -exec mkdir -p ./packages/{} \; -exec cp -r {}/. ./packages/{} \;
 
-      - name: Checkout branch
-        uses: actions/checkout@v3
-
       - name: Install dependencies
-        run: |
-          ls -la
-          npm i
+        run: npm i
 
       - name: Build CSS
         run: npm run build:css

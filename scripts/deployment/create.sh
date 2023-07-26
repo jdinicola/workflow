@@ -8,6 +8,7 @@ scripts/\* \
 mocks/\* \
 dist/\* \
 src/\* \
+tmp/\* \
 npm-debug.log \
 package\*.json \
 \*.md \
