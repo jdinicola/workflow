@@ -51,7 +51,7 @@ jobs:
 
   staging:
     name: Deploy
-    needs: bundle
+    needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
