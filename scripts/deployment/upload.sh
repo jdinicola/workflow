@@ -2,5 +2,4 @@
 
 echo "upload bundle..."
 
-echo "$DEPLOY_API_URL"
-echo "$DEPLOY_TOKEN"
+echo "BUNDLE_NAME=123abc" >> $GITHUB_OUTPUT
