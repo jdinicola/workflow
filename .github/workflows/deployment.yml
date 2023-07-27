@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
-          cache-dependency-path: package-lock.json
+          #cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: cd tmp && npm i
@@ -55,14 +55,14 @@ jobs:
           if-no-files-found: error
 
   staging:
-    name: Deploy
+    name: Deploy to staging
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
 
   production:
-    name: Deploy
+    name: Deploy to production 
     needs: staging
     uses: ./.github/workflows/deploy.yml
     with:
