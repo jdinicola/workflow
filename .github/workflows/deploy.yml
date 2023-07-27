@@ -15,9 +15,11 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     environment:
       name: ${{ inputs.ENVIRONMENT }}
-      url: ${{ vars.DEPLOYMENT_URL }}${{ inputs.ENVIRONMENT == 'staging' && "?d=${{ steps.deploy-service.outputs.deployed_version }}" || '' }}
+      url: ${{ inputs.ENVIRONMENT == 'staging' && '?d=${{ steps.deploy-service.outputs.deployed_version }}' || ${{ vars.DEPLOYMENT_URL }} }}
+
     outputs:
       deployed_version: ${{ steps.deploy-service.outputs.DEPLOYED_VERSION }}
 
