@@ -10,9 +10,11 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout branch
+        uses: actions/checkout@v3
       
-      - uses: actions/checkout@v3
+      - name: Checkout branch (core components)
+        uses: actions/checkout@v3
         with:
           repository: jdinicola/playground
           token: ${{ secrets.GH_TOKEN }}
@@ -55,14 +57,12 @@ jobs:
           if-no-files-found: error
 
   staging:
-    name: Deploy to staging
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
 
   production:
-    name: Deploy to production 
     needs: staging
     uses: ./.github/workflows/deploy.yml
     with:
