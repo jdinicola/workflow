@@ -17,7 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.ENVIRONMENT }}
-      url: https://example.com/
+      url: ${{ vars.DEPLOYMENT_URL }}?d=${{ steps.deploy-service.outputs.deployed_version }}
+    outputs:
+      deployed_version: ${{ steps.deploy-service.outputs.DEPLOYED_VERSION }}
 
     env:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
@@ -39,7 +41,10 @@ jobs:
         run: echo "terminate oldest service..."
 
       - name: Deploy new service
-        run: echo "deploy new service..."
+        id: deploy-service
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/deploy.sh
+          bash ${GITHUB_WORKSPACE}/scripts/deployment/deploy.sh
 
       - name: Promote service
         if: ${{ inputs.PROMOTE == true }}
