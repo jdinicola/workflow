@@ -10,10 +10,9 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-        uses: actions/checkout@v3
-
-      - name: Checkout branch (core components)
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      
+      - uses: actions/checkout@v3
         with:
           repository: jdinicola/playground
           token: ${{ secrets.GH_TOKEN }}
