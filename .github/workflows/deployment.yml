@@ -18,10 +18,10 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           path: tmp
 
-      - name: Use Node.js ${ { env.NODE_VERSION } }
+      - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${ { env.NODE_VERSION } }
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
           cache-dependency-path: package-lock.json
 
