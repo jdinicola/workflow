@@ -13,7 +13,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to ${{ inputs.ENVIRONMENT }}
+    name: Deploy
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.ENVIRONMENT }}

@@ -57,12 +57,14 @@ jobs:
           if-no-files-found: error
 
   staging:
+    name: Staging
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
 
   production:
+    name: Production 
     needs: staging
     uses: ./.github/workflows/deploy.yml
     with:
