@@ -18,7 +18,7 @@ jobs:
 
     environment:
       name: ${{ inputs.ENVIRONMENT }}
-      url: ${{ inputs.ENVIRONMENT == 'staging' && '?d=${{ steps.deploy-service.outputs.deployed_version }}' || ${{ vars.DEPLOYMENT_URL }} }}
+      url: ${{ inputs.ENVIRONMENT == 'staging' && '?d=${{ steps.deploy-service.outputs.deployed_version }}' || vars.DEPLOYMENT_URL }}
 
     outputs:
       deployed_version: ${{ steps.deploy-service.outputs.DEPLOYED_VERSION }}
