@@ -14,7 +14,7 @@ jobs:
     name: Build
     needs: quality
     uses: ./.github/workflows/build.yml
-    with:
+    secrets:
       repo-token: ${{ secrets.GH_TOKEN }}
 
   staging:
