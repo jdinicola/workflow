@@ -34,14 +34,5 @@ jobs:
 
   notify:
     name: Notify deployment
-    runs-on: ubuntu-latest
     needs: production
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-
-      - name: Get PR number and commit message
-        run: echo "pr number and commite message..."
-
-      - name: Send Teams channel notification
-        run: echo "send notification..."
+    uses: ./.github/workflows/notify.yml
