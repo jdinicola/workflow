@@ -1,0 +1,46 @@
+name: Quality
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Install
+        run: npm i
+
+      - name: Run tests
+        run: echo "npm run test"
+
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Install
+        run: npm i
+
+      - name: Run ESLint
+        run: echo "npm run lint:ci"
+
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Install
+        run: npm i
+
+      - name: Run Prettier
+        run: echo "npm run format:check"

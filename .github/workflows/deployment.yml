@@ -6,6 +6,10 @@ on:
       - main
 
 jobs:
+  qualyty:
+    name: Quality
+    uses: ./.github/workflows/quality.yml
+
   build:
     name: Build
     runs-on: ubuntu-latest
