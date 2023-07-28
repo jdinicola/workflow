@@ -12,6 +12,7 @@ jobs:
 
   build:
     name: Build
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -62,7 +63,7 @@ jobs:
 
   staging:
     name: Staging
-    needs: [quality, build]
+    needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
