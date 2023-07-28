@@ -17,7 +17,7 @@ jobs:
       - name: Checkout branch (core components)
         uses: actions/checkout@v3
         with:
-          repository: jdinicola/playground
+          repository: ${{ env.CORE_COMPONENTS_REPOSITORY }}
           token: ${{ secrets.repo-token }}
           path: tmp
 
