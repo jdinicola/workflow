@@ -1,0 +1,56 @@
+name: Build
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: Build
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+      
+      - name: Checkout branch (core components)
+        uses: actions/checkout@v3
+        with:
+          repository: jdinicola/playground
+          token: ${{ secrets.GH_TOKEN }}
+          path: tmp
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          #cache: "npm"
+          #cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: cd tmp && npm i
+
+      - name: Build packages
+        run: cd tmp && npm run build
+
+      - name: Copy dist packages
+        run: cd tmp && find packages/* -type d -name dist -exec mkdir -p ../{} \; -exec cp -r {}/. ../{} \;
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build CSS
+        run: npm run build:css
+
+      - name: Build criticals
+        run: npm run build:criticals
+
+      - name: Create zip file
+        run: bash ./scripts/deployment/create.sh
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle
+          path: ./dist/bundle.zip
+          retention-days: 1
+          if-no-files-found: error
