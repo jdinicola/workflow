@@ -10,29 +10,29 @@ jobs:
     name: Quality
     uses: ./.github/workflows/quality.yml
 
-  bundle:
-    name: Bundle
+  build:
+    name: Build
     needs: quality
     uses: ./.github/workflows/build.yml
     secrets:
       repo-token: ${{ secrets.GH_TOKEN }}
 
-  staging:
-    name: Staging
-    needs: bundle
+  deploy-staging:
+    name: Deploy
+    needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       environment: staging
       promote: false
 
-  production:
-    name: Production 
-    needs: staging
+  deploy-production:
+    name: Deploy 
+    needs: deploy-staging
     uses: ./.github/workflows/deploy.yml
     with:
       environment: production
 
   notify:
-    name: Notify deployment
-    needs: production
+    name: Notify
+    needs: deploy-production
     uses: ./.github/workflows/notify.yml

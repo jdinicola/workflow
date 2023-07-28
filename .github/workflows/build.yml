@@ -7,8 +7,8 @@ on:
         required: true
 
 jobs:
-  build:
-    name: Build
+  bundle:
+    name: Bundle
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch

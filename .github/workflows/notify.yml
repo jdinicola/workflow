@@ -5,7 +5,7 @@ on:
 
 jobs:
   teams:
-    name: Teams notification
+    name: Teams
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
