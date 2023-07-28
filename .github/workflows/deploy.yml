@@ -13,8 +13,7 @@ on:
 
   workflow_dispatch:
     inputs:
-      ENVIRONMENT:
-        name: Environment
+      environment:
         type: environment
 
 jobs:
