@@ -22,9 +22,9 @@ jobs:
           path: tmp
 
       - name: prov
-          run: |
-            echo "$NODE_VERSION"
-            echo "$CORE_COMPONENTS_REPO"
+        run: |
+          echo "$NODE_VERSION"
+          echo "$CORE_COMPONENTS_REPO"
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
