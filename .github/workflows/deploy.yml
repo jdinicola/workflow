@@ -12,8 +12,10 @@ on:
         default: true
 
     outputs:
-      deployed_version: ${{ jobs.deploy.outputs.deployed_version }}
-      bundle_name: ${{ jobs.deploy.outputs.bundle_name }}
+      deployed_version:
+        value: ${{ jobs.deploy.outputs.deployed_version }}
+      bundle_name:
+        value: ${{ jobs.deploy.outputs.bundle_name }}
 
 jobs:
   deploy:
