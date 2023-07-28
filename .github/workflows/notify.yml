@@ -6,7 +6,7 @@ on:
       bundle_name:
         required: true
         type: string
-      deployed-version:
+      deployed_version:
         required: true
         type: string
 
