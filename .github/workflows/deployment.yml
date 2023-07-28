@@ -14,21 +14,23 @@ jobs:
     name: Build
     needs: quality
     uses: ./.github/workflows/build.yml
+    with:
+      repo-token: ${{ secrets.GH_TOKEN }}
 
   staging:
     name: Staging
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
-      ENVIRONMENT: staging
-      PROMOTE: false
+      environment: staging
+      promote: false
 
   production:
     name: Production 
     needs: staging
     uses: ./.github/workflows/deploy.yml
     with:
-      ENVIRONMENT: production
+      environment: production
 
   notify:
     name: Notify deployment

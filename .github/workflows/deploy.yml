@@ -3,10 +3,10 @@ name: Deploy ARC bundle
 on:
   workflow_call:
     inputs:
-      ENVIRONMENT:
+      environment:
         required: true
         type: string
-      PROMOTE:
+      promote:
         required: false
         type: boolean
         default: true
@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: ${{ inputs.ENVIRONMENT }}
-      url: ${{ vars.DEPLOYMENT_URL }}${{ inputs.ENVIRONMENT == 'staging' && steps.deploy-service.outputs.deployed_version || '' }}
+      name: ${{ inputs.environment }}
+      url: ${{ vars.DEPLOYMENT_URL }}${{ inputs.environment == 'staging' && steps.deploy-service.outputs.deployed_version || '' }}
 
     outputs:
       deployed_version: ${{ steps.deploy-service.outputs.DEPLOYED_VERSION }}
@@ -57,7 +57,7 @@ jobs:
           bash ${GITHUB_WORKSPACE}/scripts/deployment/deploy.sh
 
       - name: Promote service
-        if: ${{ inputs.PROMOTE == true }}
+        if: ${{ inputs.promote == true }}
         env:
           DEPLOYED_VERSION: ${{ steps.deploy-service.outputs.deployed_version }}
         run: |
