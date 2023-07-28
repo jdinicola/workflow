@@ -33,6 +33,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       environment: production
+      promote: true
 
   notify:
     name: Notify

@@ -7,9 +7,8 @@ on:
         required: true
         type: string
       promote:
-        required: false
+        required: true
         type: boolean
-        default: true
 
     outputs:
       deployed_version:

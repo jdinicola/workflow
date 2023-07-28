@@ -14,9 +14,18 @@ jobs:
   teams:
     name: Teams
     runs-on: ubuntu-latest
+
+    env:
+      BUNDLE_NAME: ${{ inputs.bundle_name }}
+      DEPLOYED_VERSION: ${{ inputs.deployed_version }}
+
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+
+      - name: Prov
+        run: |
+          echo "${{ inputs.bundle_name }}"
 
       - name: Get PR number and commit message
         run: |
@@ -24,9 +33,6 @@ jobs:
           echo "COMMIT_MESSSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
 
       - name: Send Teams channel notification
-        env:
-          BUNDLE_NAME: ${{ inputs.bundle_name }}
-          DEPLOYED_VERSION: ${{ inputs.deployed_version }}
         run: |
           chmod +x ./scripts/deployment/notify.sh
           bash ./scripts/deployment/notify.sh
