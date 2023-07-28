@@ -13,7 +13,7 @@ on:
 
     outputs:
       deployed_version: ${{ jobs.deploy.outputs.deployed_version }}
-      bundle_name: ${{ jobs.deploy.outputs.output1 }}
+      bundle_name: ${{ jobs.deploy.outputs.bundle_name }}
 
 jobs:
   deploy:
