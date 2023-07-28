@@ -19,7 +19,7 @@ jobs:
 
   staging:
     name: Staging
-    needs: build
+    needs: bundle
     uses: ./.github/workflows/deploy.yml
     with:
       environment: staging
