@@ -17,19 +17,14 @@ jobs:
       - name: Checkout branch (core components)
         uses: actions/checkout@v3
         with:
-          repository: ${{ env.CORE_COMPONENTS_REPO }}
+          repository: ${{ vars.CORE_COMPONENTS_REPO }}
           token: ${{ secrets.repo-token }}
           path: tmp
 
-      - name: prov
-        run: |
-          echo "$NODE_VERSION"
-          echo "$CORE_COMPONENTS_REPO"
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: Use Node.js ${{ vars.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ vars.NODE_VERSION }}
           #cache: "npm"
           #cache-dependency-path: package-lock.json
 
