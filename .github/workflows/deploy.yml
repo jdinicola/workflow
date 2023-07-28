@@ -11,6 +11,10 @@ on:
         type: boolean
         default: true
 
+    outputs:
+      deployed_version: ${{ jobs.deploy.outputs.deployed_version }}
+      bundle_name: ${{ jobs.deploy.outputs.output1 }}
+
 jobs:
   deploy:
     name: ${{ inputs.environment }}
@@ -21,7 +25,8 @@ jobs:
       url: ${{ vars.DEPLOYMENT_URL }}${{ inputs.environment == 'staging' && steps.deploy-service.outputs.deployed_version || '' }}
 
     outputs:
-      deployed_version: ${{ steps.deploy-service.outputs.DEPLOYED_VERSION }}
+      bundle_name: ${{ steps.upload-bundle.outputs.bundle_name }}
+      deployed_version: ${{ steps.deploy-service.outputs.deployed_version }}
 
     env:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
@@ -40,26 +45,26 @@ jobs:
       - name: Upload bundle
         id: upload-bundle
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/upload.sh
-          bash ${GITHUB_WORKSPACE}/scripts/deployment/upload.sh
+          chmod +x ./scripts/deployment/upload.sh
+          bash ./scripts/deployment/upload.sh
 
       - name: Terminate oldest service
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/terminate.sh
-          bash ${GITHUB_WORKSPACE}/scripts/deployment/terminate.sh
+          chmod +x ./scripts/deployment/terminate.sh
+          bash ./scripts/deployment/terminate.sh
 
       - name: Deploy new service
         id: deploy-service
         env:
           BUNDLE_NAME: ${{ steps.upload-bundle.outputs.bundle_name }}
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/deploy.sh
-          bash ${GITHUB_WORKSPACE}/scripts/deployment/deploy.sh
+          chmod +x ./scripts/deployment/deploy.sh
+          bash ./scripts/deployment/deploy.sh
 
       - name: Promote service
         if: ${{ inputs.promote == true }}
         env:
           DEPLOYED_VERSION: ${{ steps.deploy-service.outputs.deployed_version }}
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/scripts/deployment/promote.sh
-          bash ${GITHUB_WORKSPACE}/scripts/deployment/promote.sh
+          chmod +x ./scripts/deployment/promote.sh
+          bash ./scripts/deployment/promote.sh

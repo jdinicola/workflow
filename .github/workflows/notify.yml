@@ -2,6 +2,13 @@ name: Notify
 
 on:
   workflow_call:
+    inputs:
+      bundle_name:
+        required: true
+        type: string
+      deployed-version:
+        required: true
+        type: string
 
 jobs:
   teams:
@@ -12,7 +19,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Get PR number and commit message
-        run: echo "pr number and commite message..."
+        run: |
+          echo "PULL_REQUEST_NUMBER=$(echo '${{ github.event.head_commit.message }}' | grep -oP '(?<=#)\d+')" >> $GITHUB_ENV
+          echo "COMMIT_MESSSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
 
       - name: Send Teams channel notification
-        run: echo "send notification..."
+        run: |
+          chmod +x ./scripts/deployment/notify.sh
+          bash ./scripts/deployment/notify.sh
