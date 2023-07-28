@@ -12,6 +12,7 @@ jobs:
 
   build:
     name: Build
+    needs: quality
     uses: ./.github/workflows/build.yml
 
   staging:
