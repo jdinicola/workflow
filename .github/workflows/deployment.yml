@@ -40,5 +40,5 @@ jobs:
     needs: deploy-production
     uses: ./.github/workflows/notify.yml
     with:
-      bundle_name: ${{ needs.deploy.outputs.bundle_name }}
-      deployed_version: ${{ needs.deploy.outputs.deployed_version }}
+      bundle_name: ${{ needs.deploy-production.outputs.bundle_name }}
+      deployed_version: ${{ needs.deploy-production.outputs.deployed_version }}
