@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests:
-    name: Tests
+    name: Unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -21,8 +21,8 @@ jobs:
       - name: Run tests
         run: echo "npm run test"
 
-  eslint:
-    name: ESLint
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -34,8 +34,8 @@ jobs:
       - name: Run ESLint
         run: echo "npm run lint:ci"
 
-  prettier:
-    name: Prettier
+  format:
+    name: Format
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch

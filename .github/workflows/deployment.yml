@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  qualyty:
+  quality:
     name: Quality
     uses: ./.github/workflows/quality.yml
 
@@ -62,7 +62,7 @@ jobs:
 
   staging:
     name: Staging
-    needs: build
+    needs: [quality, build]
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: staging
