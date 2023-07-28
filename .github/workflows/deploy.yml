@@ -12,6 +12,10 @@ on:
         default: true
 
   workflow_dispatch:
+    inputs:
+      ENVIRONMENT:
+        name: Environment
+        type: environment
 
 jobs:
   deploy:
