@@ -10,8 +10,8 @@ jobs:
     name: Quality
     uses: ./.github/workflows/quality.yml
 
-  build:
-    name: Build
+  bundle:
+    name: Bundle
     needs: quality
     uses: ./.github/workflows/build.yml
     secrets:
