@@ -1,4 +1,4 @@
-name: Deploy ARC bundle
+name: Deploy
 
 on:
   workflow_call:
