@@ -35,12 +35,6 @@ jobs:
       environment: production
       promote: true
 
-  prov:
-    name: Prov
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ toJson(github) }}"
-
   notify:
     name: Notify
     needs: deploy-production
