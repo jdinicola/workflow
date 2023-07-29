@@ -39,7 +39,7 @@ jobs:
     name: Prov
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJson(github) }}
+      - run: echo "${{ toJson(github) }}"
 
   notify:
     name: Notify
