@@ -35,6 +35,10 @@ jobs:
       environment: production
       promote: true
 
+  prov:
+    name: Prov
+    run: echo ${{ toJson(github) }}
+
   notify:
     name: Notify
     needs: deploy-production
