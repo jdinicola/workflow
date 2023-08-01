@@ -25,7 +25,7 @@ jobs:
         uses: robinraju/release-downloader@v1.8
         with:
           repository: ${{ vars.CORE_COMPONENTS_REPO }}
-          token: ${{ GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           latest: true
           fileName: "packages.zip"
           out-file-path: "./"
