@@ -39,7 +39,7 @@ jobs:
           #cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: cd tmp && npm i
+        run: npm i
 
       - name: Build CSS
         run: npm run build:css
