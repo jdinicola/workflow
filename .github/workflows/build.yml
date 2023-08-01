@@ -26,7 +26,7 @@ jobs:
       - name: Download core components
         uses: robinraju/release-downloader@v1.8
         with:
-          repository: chakra-ui/chakra-ui
+          repository: mastodon/mastodon
           latest: true
           zipBall: true
           out-file-path: "./packages"
