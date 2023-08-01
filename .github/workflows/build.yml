@@ -27,8 +27,7 @@ jobs:
           repository: ${{ vars.CORE_COMPONENTS_REPO }}
           token: ${{ secrets.repo-token }}
           latest: true
-          zipBall: true
-          out-file-path: "./packages"
+          fileName: "packages.zip"
           extract: true
 
       - name: Use Node.js ${{ vars.NODE_VERSION }}
