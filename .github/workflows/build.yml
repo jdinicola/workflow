@@ -24,6 +24,7 @@ jobs:
       - name: Download core components
         uses: robinraju/release-downloader@v1.8
         with:
+          repository: ${{ vars.CORE_COMPONENTS_REPO }}
           latest: true
           fileName: "packages.zip"
           out-file-path: "./"
