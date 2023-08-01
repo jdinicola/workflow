@@ -6,6 +6,8 @@ on:
       repo-token:
         required: true
 
+  workflow_dispatch:
+
 jobs:
   bundle:
     name: Bundle
