@@ -27,7 +27,7 @@ jobs:
           repository: chakra-ui/chakra-ui
           latest: true
           fileName: "*.zip"
-          out-file-path: "./"
+          out-file-path: "./packages"
           extract: true
 
       - name: Install dependencies
