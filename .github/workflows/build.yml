@@ -6,8 +6,6 @@ on:
       repo-token:
         required: true
 
-  workflow_dispatch:
-
 jobs:
   bundle:
     name: Bundle
@@ -15,6 +13,13 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+      
+      - name: Checkout branch (core components)
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ vars.CORE_COMPONENTS_REPO }}
+          token: ${{ secrets.repo-token }}
+          path: tmp
 
       - name: Use Node.js ${{ vars.NODE_VERSION }}
         uses: actions/setup-node@v3
@@ -23,14 +28,14 @@ jobs:
           #cache: "npm"
           #cache-dependency-path: package-lock.json
 
-      - name: Download core components
-        uses: robinraju/release-downloader@v1.8
-        with:
-          repository: mastodon/mastodon
-          latest: true
-          zipBall: true
-          out-file-path: "./packages"
-          extract: true
+      - name: Install dependencies
+        run: cd tmp && npm i
+
+      - name: Build packages
+        run: cd tmp && npm run build
+
+      - name: Copy dist packages
+        run: cd tmp && find packages/* -type d -name dist -exec mkdir -p ../{} \; -exec cp -r {}/. ../{} \;
 
       - name: Install dependencies
         run: npm i
