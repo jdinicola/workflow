@@ -1,5 +1,4 @@
 name: Quality
-run-name: ${{ github.workflow }} by @${{ github.actor }}
 
 on:
   pull_request:
