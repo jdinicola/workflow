@@ -1,4 +1,5 @@
-name: Testing
+name: Deployment
+run-name: ${{ github.workflow }} by @${{ github.actor }}
 
 on:
   push:
