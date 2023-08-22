@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mkdir dist && zip dist/bundle.zip -r . -x \
 .\* \
