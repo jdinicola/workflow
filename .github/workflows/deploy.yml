@@ -36,12 +36,14 @@ jobs:
     env:
       DEPLOY_TOKEN: ${{ secrets.deploy_token }}
       DEPLOY_API_URL: ${{ vars.DEPLOY_API_URL }}
+      PAGEBUILDER_VERSION: ${{ vars.PAGEBUILDER_VERSION }}
 
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
 
-      - run: echo "${{ toJson(github) }}"
+      - name: Dump github object
+        run: echo "${{ toJson(github) }}"
 
       - name: Download build artifact
         uses: actions/download-artifact@v3
