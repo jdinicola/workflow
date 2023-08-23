@@ -21,12 +21,8 @@ jobs:
 
       - name: Get PR number and commit message
         run: |
-          echo "PULL_REQUEST_NUMBER=$(echo 'Merge pull request #75 from PrisaMedia/docs/update-docs
-  
-  Update documentation' | grep -oP '(?<=#)\d+)'" >> $GITHUB_ENV
-          echo "COMMIT_MESSSAGE=Merge pull request #75 from PrisaMedia/docs/update-docs
-  
-  Update documentation" >> $GITHUB_ENV
+          echo "PULL_REQUEST_NUMBER=$(echo '${{ github.event.head_commit.message }}' | grep -oP '(?<=#)\d+)'" >> $GITHUB_ENV
+          echo "COMMIT_MESSSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
 
       - name: Send Teams channel notification
         env:
