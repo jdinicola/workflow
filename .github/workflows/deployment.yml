@@ -27,6 +27,8 @@ jobs:
     with:
       environment: staging
       promote: false
+    secrets:
+      deploy-token: ${{ secrets.DEPLOY-TOKEN }}
 
   deploy-production:
     name: Deploy 
@@ -35,6 +37,8 @@ jobs:
     with:
       environment: production
       promote: true
+    secrets:
+      deploy_token: ${{ secrets.DEPLOY_TOKEN }}
 
   notify:
     name: Notify
