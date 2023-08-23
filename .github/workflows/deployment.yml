@@ -28,7 +28,7 @@ jobs:
       environment: staging
       promote: false
     secrets:
-      deploy-token: ${{ secrets.DEPLOY-TOKEN }}
+      deploy_token: ${{ secrets.DEPLOY_TOKEN }}
 
   deploy-production:
     name: Deploy 
