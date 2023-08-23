@@ -42,8 +42,8 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v3
 
-      - name: Dump github object
-        run: echo "${{ toJson(github) }}"
+      # - name: Dump github object
+      #   run: echo "${{ toJson(github) }}"
 
       - name: Download build artifact
         uses: actions/download-artifact@v3
