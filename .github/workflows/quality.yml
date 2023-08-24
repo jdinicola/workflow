@@ -8,6 +8,8 @@ on:
 
   workflow_call:
 
+  workflow_dispatch:
+
 jobs:
   tests:
     name: Test
@@ -21,6 +23,11 @@ jobs:
 
       - name: Run tests
         run: echo "npm run test"
+
+      - name: Add coverage summary
+        run: |
+          chmod +x ./scripts/deployment/coverage-summary.sh
+          bash ./scripts/deployment/coverage-summary.sh
 
   lint:
     name: Lint
