@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TOTAL_COVERAGE=$(jq '[.total[] | if .pct == "Unknown" then 0 else .pct end] | add / length | tonumber | round' coverage/coverage-summary.json)
+TOTAL_COVERAGE=$(jq '[.total[] | if .pct == "Unknown" then 0 else .pct end] | add / length | tonumber | round' ../coverage/coverage-summary.json)
 
 IFS=', ' read -r -a THRESHOLD <<< "$COVERAGE_THRESHOLD"
 

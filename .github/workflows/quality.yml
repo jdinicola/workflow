@@ -26,8 +26,8 @@ jobs:
 
       - name: Add coverage summary
         run: |
-          chmod +x ./scripts/deployment/coverage-summary.sh
-          bash ./scripts/deployment/coverage-summary.sh
+          chmod +x ./scripts/coverage-summary.sh
+          bash ./scripts/coverage-summary.sh
 
   lint:
     name: Lint
