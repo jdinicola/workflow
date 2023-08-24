@@ -21,8 +21,8 @@ jobs:
 
       - name: Get PR number and commit message
         run: |
-          echo "PULL_REQUEST_NUMBER=$(echo '${{ github.event.head_commit.message }}' | grep -oP '(?<=#)\d+)')" >> $GITHUB_ENV
-          echo "COMMIT_MESSSAGE=$(echo '${{ github.event.head_commit.message }}' | grep -oP '\s+\n\s+(.*)')" >> $GITHUB_ENV
+          echo "PULL_REQUEST_NUMBER=$(echo '${{ github.event.head_commit.message }}' | grep -oP '(?<=#)\d+')" >> $GITHUB_ENV
+          echo "COMMIT_MESSSAGE=$(echo '${{ github.event.head_commit.message }}' | grep -oP '\n\n(.*)')" >> $GITHUB_ENV
 
       - name: Send Teams channel notification
         env:
