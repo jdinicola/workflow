@@ -2,9 +2,7 @@
 
 WORKING_DIR=${PWD}
 
-echo "$WORKING_DIR"
-
-TOTAL_COVERAGE=$(jq '[.total[] | if .pct == "Unknown" then 0 else .pct end] | add / length | tonumber | round' ../coverage/coverage-summary.json)
+TOTAL_COVERAGE=$(jq '[.total[] | if .pct == "Unknown" then 0 else .pct end] | add / length | tonumber | round' $WORKING_DIR/coverage/coverage-summary.json)
 
 IFS=', ' read -r -a THRESHOLD <<< "$COVERAGE_THRESHOLD"
 
@@ -22,7 +20,7 @@ jq -r '["Metric", "Total", "Covered", "Skipped", "%"],
 ["Lines", .total.lines.total, .total.lines.covered, .total.lines.skipped, .total.lines.pct],  
  ["Statements", .total.statements.total, .total.statements.covered, .total.statements.skipped, .total.statements.pct],  
  ["Functions", .total.functions.total, .total.functions.covered, .total.functions.skipped, .total.functions.pct],  
- ["Branches", .total.branches.total, .total.branches.covered, .total.branches.skipped, .total.branches.pct] | map(tostring) | join(" | ")' ../coverage/coverage-summary.json
+ ["Branches", .total.branches.total, .total.branches.covered, .total.branches.skipped, .total.branches.pct] | map(tostring) | join(" | ")' $WORKING_DIR/coverage/coverage-summary.json
 OUTPUT+=" "
 OUTPUT+="_Minimum allowed coverage is \`${THRESHOLD[0]}%\`_"
 
