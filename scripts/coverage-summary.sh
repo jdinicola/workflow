@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "${pwd}"
+WORKING_DIR=${PWD}
+
+echo "$WORKING_DIR"
 
 TOTAL_COVERAGE=$(jq '[.total[] | if .pct == "Unknown" then 0 else .pct end] | add / length | tonumber | round' ../coverage/coverage-summary.json)
 
