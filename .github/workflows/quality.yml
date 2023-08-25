@@ -10,6 +10,9 @@ on:
 
   workflow_dispatch:
 
+env:
+  COVERAGE_THRESHOLD: ${{ vars.COVERAGE_THRESHOLD }}
+
 jobs:
   tests:
     name: Test
