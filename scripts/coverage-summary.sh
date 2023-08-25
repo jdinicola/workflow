@@ -16,7 +16,7 @@ OUTPUT="Total | Lines | Statements | Functions | Branches"
 OUTPUT+="\n"
 OUTPUT+=":--- | :--- | :--- | :--- | :---"
 OUTPUT+="\n"
-OUTPUT+="![Coverage](https://badgers.space/badge/Coverage/${TOTAL_COVERAGE}%25/${STATUS}) | "
+OUTPUT+="![Coverage](https://badgers.space/badge/Coverage/${TOTAL_COVERAGE}%25/${STATUS}?icon=feather-code) | "
 OUTPUT+=$(jq -r '[
   "**\(.total.lines.pct | tonumber | round)%** (\(.total.lines.covered)/\(.total.lines.total))",
   "**\(.total.statements.pct | tonumber | round)%** (\(.total.statements.covered)/\(.total.statements.total))",
