@@ -34,6 +34,7 @@ jobs:
     outputs:
       bundle_name: ${{ steps.upload-bundle.outputs.bundle_name }}
       deployed_version: ${{ steps.deploy-service.outputs.deployed_version }}
+      deployment_url: ${{ steps.deploy-service.outputs.deployment_url }}
 
     env:
       DEPLOY_TOKEN: ${{ secrets.deploy_token }}
