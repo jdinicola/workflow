@@ -22,16 +22,14 @@ jobs:
       #     path: tmp
 
       - name: Read package.json
-        run: |
-          echo "PACKAGE_JSON=$(jq -c . < ./package.json)" >> $GITHUB_ENV
-          echo '${{ fromJson(env.PACKAGE_JSON).version }}'
+        run: echo "PACKAGE_JSON=$(jq -c . < ./package.json)" >> $GITHUB_ENV
 
       - name: Download core components
         uses: robinraju/release-downloader@v1.8
         with:
           repository: ${{ vars.CORE_COMPONENTS_REPO }}
           token: ${{ secrets.repo-token }}
-          latest: true
+          tag: '${{ fromJson(env.PACKAGE_JSON).packages }}'
           fileName: "packages.zip"
           extract: true
 
