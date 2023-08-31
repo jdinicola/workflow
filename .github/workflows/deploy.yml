@@ -43,7 +43,7 @@ jobs:
       PAGEBUILDER_VERSION: ${{ vars.PAGEBUILDER_VERSION }}
 
     steps:
-      - run: echo "${{ toJson(job) }}"
+      - run: echo "${{ toJson(jobs) }}"
       
       - name: Checkout branch
         uses: actions/checkout@v3
