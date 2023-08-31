@@ -22,7 +22,7 @@ jobs:
       #     path: tmp
 
       - name: Read core components version from package.json
-        run: echo "CORE_COMPONENTS_VERSION=$(jq '.version' ./package.json)" >> $GITHUB_ENV
+        run: echo "CORE_COMPONENTS_VERSION=$(jq '.packages' ./package.json)" >> $GITHUB_ENV
 
       - name: Download core components
         uses: robinraju/release-downloader@v1.8
