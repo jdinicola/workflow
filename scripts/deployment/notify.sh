@@ -7,7 +7,7 @@ PAYLOAD='{
     "themeColor": "009f4a",
     "title": "'$REPOSITORY'",
     "sections": [{
-      "activityTitle": "'$(echo $COMMIT_MESSAGE | sed "s/\[/\\[/g; s/\]/\\]/g")'",
+      "activityTitle": "'$(echo "$COMMIT_MESSAGE" | sed "s/\[/\\[/g; s/\]/\\]/g")'",
       "activitySubtitle": "Por '$TRIGGERING_ACTOR'", 
       "facts": [{
         "name": "Bundle     ",
