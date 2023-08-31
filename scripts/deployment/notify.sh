@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "$COMMIT_MESSSAGE"
+
 PAYLOAD='{
     "@type": "MessageCard",
     "@context": "https://schema.org/extensions",
