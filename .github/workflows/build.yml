@@ -22,14 +22,14 @@ jobs:
       #     path: tmp
 
       - name: Read core components version from package.json
-        run: echo "CORE_COMPONENTS_VERSION=$(jq -r '.packages' ./package.json)" >> $GITHUB_ENV
+        run: echo "CORE_PACKAGES_VERSION=$(jq -r '.coreDependencies."packages"' ./package.json)" >> $GITHUB_ENV
 
-      - name: Download core components
+      - name: Download core packages from release v${{ env.CORE_PACKAGES_VERSION }}
         uses: robinraju/release-downloader@v1.8
         with:
           repository: ${{ vars.CORE_COMPONENTS_REPO }}
           token: ${{ secrets.repo-token }}
-          tag: 'v${{ env.CORE_COMPONENTS_VERSION }}'
+          tag: 'v${{ env.CORE_PACKAGES_VERSION }}'
           fileName: "packages.zip"
           extract: true
 
