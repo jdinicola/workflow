@@ -40,11 +40,11 @@ jobs:
     secrets:
       deploy_token: ${{ secrets.DEPLOY_TOKEN }}
 
-  notify-production:
+  notify:
     name: Notify
     needs: deploy-production
     uses: ./.github/workflows/notify.yml
     with:
-      environment: production
       bundle_name: ${{ needs.deploy-production.outputs.bundle_name }}
       deployed_version: ${{ needs.deploy-production.outputs.deployed_version }}
+      deployment_url: ${{ vars.DEPLOYMENT_URL }}

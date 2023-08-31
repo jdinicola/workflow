@@ -3,13 +3,13 @@ name: Notify
 on:
   workflow_call:
     inputs:
-      environment:
-        required: true
-        type: string
       bundle_name:
         required: true
         type: string
       deployed_version:
+        required: true
+        type: string
+      deployment_url:
         required: true
         type: string
 
@@ -17,9 +17,6 @@ jobs:
   teams:
     name: Teams
     runs-on: ubuntu-latest
-
-    environment:
-      name: ${{ inputs.environment }}
 
     steps:
       - name: Checkout branch
@@ -36,7 +33,7 @@ jobs:
           DEPLOYED_VERSION: ${{ inputs.deployed_version }}
           PULL_REQUEST_NUMBER: ${{ env.PULL_REQUEST_NUMBER }}
           COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
-          DEPLOYMENT_URL: ${{ vars.DEPLOYMENT_URL }}${{ inputs.environment == 'staging' && inputs.deployed_version || '' }}
+          DEPLOYMENT_URL: ${{ inputs.deployment_url }}
         run: |
           chmod +x ./scripts/deployment/notify.sh
           bash ./scripts/deployment/notify.sh
