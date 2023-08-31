@@ -22,14 +22,14 @@ jobs:
       - name: Get PR number and commit message
         run: |
           echo "PULL_REQUEST_NUMBER=$(echo '${{ github.event.head_commit.message }}' | grep -oP '(?<=#)\d+')" >> $GITHUB_ENV
-          echo "COMMIT_MESSSAGE=$(echo '${{ github.event.head_commit.message }}' | awk 'END {print}')" >> $GITHUB_ENV
+          echo "COMMIT_MESSAGE=$(echo '${{ github.event.head_commit.message }}' | awk 'END {print}')" >> $GITHUB_ENV
 
       - name: Send Teams channel notification
         env:
           BUNDLE_NAME: ${{ inputs.bundle_name }}
           DEPLOYED_VERSION: ${{ inputs.deployed_version }}
           PULL_REQUEST_NUMBER: ${{ env.PULL_REQUEST_NUMBER }}
-          COMMIT_MESSSAGE: ${{ env.COMMIT_MESSSAGE }}
+          COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
           DEPLOYMENT_URL: ${{ vars.DEPLOYMENT_URL }}
         run: |
           chmod +x ./scripts/deployment/notify.sh
