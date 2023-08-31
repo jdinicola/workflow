@@ -29,7 +29,7 @@ jobs:
         with:
           repository: ${{ vars.CORE_COMPONENTS_REPO }}
           token: ${{ secrets.repo-token }}
-          tag: '${{ CORE_COMPONENTS_VERSION }}'
+          tag: '${{ vars.CORE_COMPONENTS_VERSION }}'
           fileName: "packages.zip"
           extract: true
 
