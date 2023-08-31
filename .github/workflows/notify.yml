@@ -30,6 +30,7 @@ jobs:
           DEPLOYED_VERSION: ${{ inputs.deployed_version }}
           PULL_REQUEST_NUMBER: ${{ env.PULL_REQUEST_NUMBER }}
           COMMIT_MESSSAGE: ${{ env.COMMIT_MESSSAGE }}
+          DEPLOYMENT_URL: ${{ vars.DEPLOYMENT_URL }}
         run: |
           chmod +x ./scripts/deployment/notify.sh
           bash ./scripts/deployment/notify.sh
