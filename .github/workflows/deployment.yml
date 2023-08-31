@@ -47,4 +47,4 @@ jobs:
     with:
       bundle_name: ${{ needs.deploy-production.outputs.bundle_name }}
       deployed_version: ${{ needs.deploy-production.outputs.deployed_version }}
-      deployment_url: ${{ env.DEPLOYMENT_URL }}
+      deployment_url: ${{ needs.deploy-production.outputs.deployment_url }}

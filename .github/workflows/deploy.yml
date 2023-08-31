@@ -15,6 +15,8 @@ on:
         value: ${{ jobs.deploy.outputs.deployed_version }}
       bundle_name:
         value: ${{ jobs.deploy.outputs.bundle_name }}
+      deployment_url:
+        value: ${{ vars.DEPLOYMENT_URL }}${{ inputs.environment == 'staging' && steps.deploy-service.outputs.deployed_version || '' }}
 
     secrets:
       deploy_token:
