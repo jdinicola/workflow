@@ -5,5 +5,5 @@
         "build:css": "echo 'build css...'",
         "build:criticals": "echo 'build criticals...'"
     },
-    "packages": "1.5.3"
+    "packages": "1.5.4"
 }
