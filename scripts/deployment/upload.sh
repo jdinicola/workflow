@@ -2,4 +2,6 @@
 
 echo "upload bundle..."
 
-echo "BUNDLE_NAME=123abc" >> $GITHUB_OUTPUT
+NAME=$(git rev-parse --short $GITHUB_SHA)
+
+echo "BUNDLE_NAME=$NAME" >> $GITHUB_OUTPUT
